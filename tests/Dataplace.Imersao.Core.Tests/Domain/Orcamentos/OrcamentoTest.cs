@@ -11,6 +11,7 @@ namespace Dataplace.Imersao.Core.Tests.Domain.Orcamentos
     public class OrcamentoTest
     {
         private readonly OrcamentoFixture _fixture;
+
         public OrcamentoTest(OrcamentoFixture fixture)
         {
             _fixture = fixture;
@@ -57,12 +58,57 @@ namespace Dataplace.Imersao.Core.Tests.Domain.Orcamentos
         [Fact]
         public void TentarFecharOrcamentoJaFechadoRetornarException()
         {
-            // arrange
+            // Arrange
             var orcamento = _fixture.NovoOrcamento();
             orcamento.FecharOrcamento();
 
             // act & assert
             Assert.Throws<DomainException>(() => orcamento.FecharOrcamento());
         }
+
+        [Fact]
+        public void CancelarOrcamento()
+        {
+            // Arrange
+            var orcamento = _fixture.NovoOrcamento();
+
+            // Act
+            orcamento.CancelarOrcamento();
+
+            // Assert
+            Assert.Equal(Core.Domain.Orcamentos.Enums.OrcamentoStatusEnum.Cancelado, orcamento.Situacao);
+            Assert.Null(null);
+        }
+        
+        [Fact]
+        public void TentaCancelarOrcamentoJaFechadoRetornarException()
+        {
+            // Arrange
+            var orcamento = _fixture.NovoOrcamento();
+
+            // Act
+            orcamento.FecharOrcamento();
+            orcamento.CancelarOrcamento();
+
+            // Assert
+            Assert.Equal(Core.Domain.Orcamentos.Enums.OrcamentoStatusEnum.Cancelado, orcamento.Situacao);
+            Assert.Null(null);
+        }
+        
+        [Fact]
+        public void TentaCancelarOrcamentoJaCanceladoRetornarException()
+        {
+            // Arrange
+            var orcamento = _fixture.NovoOrcamento();
+
+            // Act
+            orcamento.CancelarOrcamento();
+            orcamento.CancelarOrcamento();
+
+            // Assert
+            Assert.Equal(Core.Domain.Orcamentos.Enums.OrcamentoStatusEnum.Cancelado, orcamento.Situacao);
+            Assert.Null(null);
+        }
+        
     }
 }

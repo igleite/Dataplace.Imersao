@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Excepions\DomainException.cs" />
+    <Compile Include="Domain\Orcamentos\Enums\OrcamentoItemStatusEnum.cs" />
     <Compile Include="Domain\Orcamentos\Enums\OrcamentoStatusEnum.cs" />
     <Compile Include="Domain\Orcamentos\Enums\TpRegistroEnum.cs" />
     <Compile Include="Domain\Orcamentos\Orcamento.cs" />
